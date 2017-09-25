@@ -5,25 +5,9 @@
 
   <testsuite name="thrust-engine-demo-test"
     errors="0" failures="0" hostname="" id="" package="thrust-engine-demo-test" skipped="0"
-    tests="0" time="0.000" timestamp="Mon, 25 Sep 2017 15:34:27 GMT">
+    tests="0" time="0.000" timestamp="Mon, 25 Sep 2017 15:45:04 GMT">
   
 
-  
-    <system-err>
-        Error while running [Brickbreaker Test / Phaser Game Loads Test]:
-
-  TypeError: value.indexOf is not a function
-    at pass (/Users/stephengeller/Desktop/Projects/makers-academy/week-9/slofe-brickbreaker/lib/custom-assertions/currentState.js:27:18)
-    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:95:23)
-    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:366:18)
-    at emitTwo (events.js:106:13)
-    at HttpRequest.emit (events.js:191:7)
-    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:382:15)
-    at emitThree (events.js:116:13)
-    at HttpRequest.emit (events.js:194:7)
-    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:166:16)
-    at emitNone (events.js:91:20)
-    </system-err>
   
 
   
