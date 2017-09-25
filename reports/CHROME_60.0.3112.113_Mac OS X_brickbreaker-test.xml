@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="1"
+            tests="4">
+
+  <testsuite name="brickbreaker-test"
+    errors="1" failures="1" hostname="" id="" package="brickbreaker-test" skipped="2"
+    tests="4" time="6.292" timestamp="Mon, 25 Sep 2017 15:34:21 GMT">
+  
+    <testcase name="Phaser Game Boots Test" classname="brickbreaker-test" time="1.154" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Phaser Game Loads Test" classname="brickbreaker-test" time="5.138" assertions="3">
+
+      <failure message="Timed out while waiting for Game for 5101 milliseconds.">    at Object.Phaser Game Loads Test (/Users/stephengeller/Desktop/Projects/makers-academy/week-9/slofe-brickbreaker/tests/brickbreaker-test.js:38:8)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
+
+    
+
+    
+    </testcase>
+  
+
+  
+    <system-err>
+        Error while running [Brickbreaker Test / Phaser Game Loads Test]:
+
+  TypeError: value.indexOf is not a function
+    at pass (/Users/stephengeller/Desktop/Projects/makers-academy/week-9/slofe-brickbreaker/lib/custom-assertions/currentState.js:27:18)
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:95:23)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:366:18)
+    at emitTwo (events.js:106:13)
+    at HttpRequest.emit (events.js:191:7)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:382:15)
+    at emitThree (events.js:116:13)
+    at HttpRequest.emit (events.js:194:7)
+    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:166:16)
+    at emitNone (events.js:91:20)
+    </system-err>
+  
+
+  
+    
+    <testcase
+      name="E2E Actors are avaialable to test" classname="brickbreaker-test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Demo Player Control from Tests" classname="brickbreaker-test">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>

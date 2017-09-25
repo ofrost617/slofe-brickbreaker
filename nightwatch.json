@@ -1,8 +1,8 @@
 {
   "src_folders" : ["./tests/"],
   "output_folder" : "reports",
-  "custom_commands_path" : ["../../lib/custom-commands/", "./custom-commands"],
-  "custom_assertions_path" : ["../../lib/custom-assertions/", "./custom-assertions"],
+  "custom_commands_path" : ["lib/custom-commands"],
+  "custom_assertions_path" : ["lib/custom-assertions/"],
   "page_objects_path" : "./page-objects/",
   "type" : "mocha",
   "options" : {
@@ -22,7 +22,7 @@
         "path" : ""
       },
       "desiredCapabilities": {
-        "browserName": "firefox",
+        "browserName": "chrome",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "handlesAlerts": true,
