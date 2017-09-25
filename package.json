@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/ofrost617/slofe-brickbreaker#readme",
   "dependencies": {
+    "jasmine": "^2.8.0",
     "jest": "^21.1.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.8.0"
   }
 }
