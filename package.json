@@ -1,0 +1,22 @@
+{
+  "name": "slofe-brickbreaker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ofrost617/slofe-brickbreaker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ofrost617/slofe-brickbreaker/issues"
+  },
+  "homepage": "https://github.com/ofrost617/slofe-brickbreaker#readme",
+  "dependencies": {
+    "jest": "^21.1.0"
+  }
+}
