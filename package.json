@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ofrost617/slofe-brickbreaker#readme",
   "dependencies": {
-    "jest": "^21.1.0"
+    "jest": "^21.1.0",
+    "phase-2-e": "^0.2.0"
   }
 }

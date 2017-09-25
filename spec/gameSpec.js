@@ -6,7 +6,7 @@ describe('Game', function() {
 
   describe('at start', function() {
 		it('player has 3 lives', function() {
-			expect(game.lives).toEqual(3);
+			expect(lives).toEqual(3);
 		});
 	});
 
