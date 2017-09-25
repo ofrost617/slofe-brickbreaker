@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="4">
+
+  <testsuite name="brickbreaker-test"
+    errors="0" failures="1" hostname="" id="" package="brickbreaker-test" skipped="2"
+    tests="4" time="6.495" timestamp="Mon, 25 Sep 2017 15:44:58 GMT">
+  
+    <testcase name="Phaser Game Boots Test" classname="brickbreaker-test" time="1.283" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Phaser Game Loads Test" classname="brickbreaker-test" time="5.212" assertions="4">
+
+    
+
+      <failure message="Timed out while waiting for state: &quot;boot&quot; after 5119 milliseconds.">    at Object.Phaser Game Loads Test (/Users/stephengeller/Desktop/Projects/makers-academy/week-9/slofe-brickbreaker/tests/brickbreaker-test.js:39:8)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
+
+      <failure message="Testing if Phaser.StateManager current state is: boot.">    at Object.Phaser Game Loads Test (/Users/stephengeller/Desktop/Projects/makers-academy/week-9/slofe-brickbreaker/tests/brickbreaker-test.js:40:15)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+  
+    
+    <testcase
+      name="E2E Actors are avaialable to test" classname="brickbreaker-test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Demo Player Control from Tests" classname="brickbreaker-test">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>
