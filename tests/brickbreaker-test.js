@@ -33,12 +33,11 @@ module.exports = {
    },
 
    'Console.log client': function(client) {
-     console.log(client);
-     console.log(client)
-   },
+     console.log(client.page.brickBreaker);
+     client.end();
 
   // 'Phaser Game Boots Test' : function (client) {
   //   client
   //     .end();
-  // }
+    }
 }

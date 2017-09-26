@@ -5,25 +5,9 @@
 
   <testsuite name="thrust-engine-demo-test"
     errors="0" failures="0" hostname="" id="" package="thrust-engine-demo-test" skipped="0"
-    tests="0" time="0.000" timestamp="Tue, 26 Sep 2017 09:20:52 GMT">
+    tests="0" time="0.000" timestamp="Tue, 26 Sep 2017 10:07:31 GMT">
   
 
-  
-    <system-err>
-        Error while running [Brickbreaker Test / Console.log client]:
-
-  TypeError: Cannot read property 'log' of undefined
-    at Object.Console.log client (/Users/oliviafrost/Desktop/Makers/FullCourse/week9/tests/brickbreaker-test.js:37:14)
-    at Module.call (/usr/local/lib/node_modules/nightwatch/lib/runner/module.js:62:34)
-    at /usr/local/lib/node_modules/nightwatch/lib/runner/testcase.js:70:29
-    at _fulfilled (/usr/local/lib/node_modules/nightwatch/node_modules/q/q.js:834:54)
-    at self.promiseDispatch.done (/usr/local/lib/node_modules/nightwatch/node_modules/q/q.js:863:30)
-    at Promise.promise.promiseDispatch (/usr/local/lib/node_modules/nightwatch/node_modules/q/q.js:796:13)
-    at /usr/local/lib/node_modules/nightwatch/node_modules/q/q.js:556:49
-    at runSingle (/usr/local/lib/node_modules/nightwatch/node_modules/q/q.js:137:13)
-    at flush (/usr/local/lib/node_modules/nightwatch/node_modules/q/q.js:125:13)
-    at _combinedTickCallback (internal/process/next_tick.js:131:7)
-    </system-err>
   
 
   
