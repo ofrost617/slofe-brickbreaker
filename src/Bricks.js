@@ -1,6 +1,6 @@
 var Bricks = function() {
-  this.row = 8;
-  this.col = 8;
+  this.row = 7;
+  this.col = 3;
 }
 
 Bricks.prototype.totalBricks = function() {
