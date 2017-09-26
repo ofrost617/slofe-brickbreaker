@@ -11,20 +11,27 @@ var lives = 3;
 var livesText;
 var lifeLostText;
 var playing = false;
+var brick = new Brick;
+var bricks = new Bricks;
 var startButton;
 
 function preload() {
+	game.stage.backgroundColor = '#eee';
+
 	handleRemoteImagesOnJSFiddle();
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
-    game.stage.backgroundColor = '#eee';
     game.load.image('paddle', 'img/paddle.png');
-    game.load.image('brick', 'img/brick.png');
+		game.load.image(brick.name, brick.imgPath);
     game.load.spritesheet('ball', 'img/wobble.png', 20, 20);
     game.load.spritesheet('button', 'img/button.png', 120, 40);
+		game.load.image('cosby', 'img/cosby.png')
+
 }
 function create() {
+		game.add.sprite(-1, -1, 'cosby')
+
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.checkCollision.down = false;
     ball = game.add.sprite(game.world.width*0.5, game.world.height-25, 'ball');
@@ -53,6 +60,7 @@ function create() {
 
     startButton = game.add.button(game.world.width*0.5, game.world.height*0.5, 'button', startGame, this, 1, 0, 2);
     startButton.anchor.set(0.5);
+
 }
 function update() {
     game.physics.arcade.collide(ball, paddle, ballHitPaddle);
@@ -62,24 +70,14 @@ function update() {
     }
 }
 function initBricks() {
-    brickInfo = {
-        width: 50,
-        height: 20,
-        count: {
-            row: 7,
-            col: 3
-        },
-        offset: {
-            top: 50,
-            left: 60
-        },
-        padding: 10
-    }
     bricks = game.add.group();
-    for(c=0; c<brickInfo.count.col; c++) {
-        for(r=0; r<brickInfo.count.row; r++) {
-            var brickX = (r*(brickInfo.width+brickInfo.padding))+brickInfo.offset.left;
-            var brickY = (c*(brickInfo.height+brickInfo.padding))+brickInfo.offset.top;
+		console.log(bricks)
+		console.log(brick)
+
+    for(c=0; c< bricks.col; c++) {
+        for(r=0; r<bricks.row; r++) {
+            var brickX = (r*(brick.width+brick.padding))+brick.offset.left;
+            var brickY = (c*(brick.height+brickInfo.padding))+brick.offset.top;
             newBrick = game.add.sprite(brickX, brickY, 'brick');
             game.physics.enable(newBrick, Phaser.Physics.ARCADE);
             newBrick.body.immovable = true;
@@ -96,7 +94,6 @@ function ballHitBrick(ball, brick) {
     }, this);
     killTween.start();
     score += 10;
-    console.log(paddle)
     increaseDifficulty()
     scoreText.setText('Points: '+score);
     if(score === brickInfo.count.row*brickInfo.count.col*10) {

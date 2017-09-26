@@ -5,9 +5,11 @@ describe('Brick', function() {
   })
 
   describe('size', function() {
-		it('brick has height and width', function() {
+		it('brick has height, width and offset', function() {
 			expect(brick.height).toEqual(20);
       expect(brick.width).toEqual(50);
+      expect(brick.offset.top).toEqual(50)
+      expect(brick.offset.left).toEqual(60)
 		});
 	});
 
