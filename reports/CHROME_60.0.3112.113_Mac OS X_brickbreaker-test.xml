@@ -5,19 +5,19 @@
 
   <testsuite name="brickbreaker-test"
     errors="0" failures="0" hostname="" id="" package="brickbreaker-test" skipped="0"
-    tests="3" time="7.311" timestamp="Tue, 26 Sep 2017 10:07:23 GMT">
+    tests="3" time="7.841" timestamp="Tue, 26 Sep 2017 10:41:49 GMT">
   
-    <testcase name="Phaser Game Boots Test" classname="brickbreaker-test" time="5.747" assertions="1">
+    <testcase name="Phaser Game Boots Test" classname="brickbreaker-test" time="6.048" assertions="1">
 
     
     </testcase>
   
-    <testcase name="Page has title" classname="brickbreaker-test" time="0.1000" assertions="1">
+    <testcase name="Page has title" classname="brickbreaker-test" time="0.1400" assertions="1">
 
     
     </testcase>
   
-    <testcase name="Console.log client" classname="brickbreaker-test" time="1.464" assertions="0">
+    <testcase name="Console.log client" classname="brickbreaker-test" time="1.653" assertions="0">
     </testcase>
   
 
