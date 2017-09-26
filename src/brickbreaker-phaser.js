@@ -86,7 +86,7 @@ function initBricks() {
 }
 function ballHitBrick(ball, brick) {
     var killTween = game.add.tween(brick.scale);
-    killTween.to({x:0,y:10}, 200, Phaser.Easing.Linear.None);
+    killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
     killTween.onComplete.addOnce(function(){
         brick.kill();
     }, this);
@@ -102,9 +102,6 @@ function ballHitBrick(ball, brick) {
 }
 
 function increaseDifficulty() {
-  // paddle.body.game.width -= 80
-  // paddle.body.game.height = 90
-  // console.log(paddle.body.game.width)
 	console.log('hello!')
 	// ball.body.velocity.add(10, -10);
 }
