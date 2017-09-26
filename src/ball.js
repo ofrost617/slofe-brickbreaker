@@ -1,3 +1,4 @@
 function Ball () {
-  this.colour = "blue"
+  this.name = "ball"
+  this.imgPath = "img/ball.png"
 };

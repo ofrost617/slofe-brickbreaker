@@ -1,7 +1,7 @@
 var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
 
-var ball;
-var paddle;
+var ball = new Ball();
+var paddle = new Paddle();
 var bricks;
 var newBrick;
 var brickInfo;
@@ -14,20 +14,19 @@ var playing = false;
 var startButton;
 
 function preload() {
-	handleRemoteImagesOnJSFiddle();
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
     game.stage.backgroundColor = '#eee';
-    game.load.image('paddle', 'img/paddle.png');
+    game.load.image(paddle.name, paddle.imgPath);
     game.load.image('brick', 'img/brick.png');
-    game.load.spritesheet('ball', 'img/wobble.png', 20, 20);
+    game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
     game.load.spritesheet('button', 'img/button.png', 120, 40);
 }
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.checkCollision.down = false;
-    ball = game.add.sprite(game.world.width*0.5, game.world.height-25, 'ball');
+    ball = game.add.sprite(game.world.width*0.5, game.world.height-25, ball.name);
     ball.animations.add('wobble', [0,1,0,2,0,1,0,2,0], 24);
     ball.anchor.set(0.5);
     game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -36,7 +35,7 @@ function create() {
     ball.checkWorldBounds = true;
     ball.events.onOutOfBounds.add(ballLeaveScreen, this);
 
-    paddle = game.add.sprite(game.world.width*0.5, game.world.height-5, 'paddle');
+    paddle = game.add.sprite(game.world.width*0.5, game.world.height-5, paddle.name);
     paddle.anchor.set(0.5,1);
     game.physics.enable(paddle, Phaser.Physics.ARCADE);
     paddle.body.immovable = true;
@@ -96,7 +95,6 @@ function ballHitBrick(ball, brick) {
     }, this);
     killTween.start();
     score += 10;
-    console.log(paddle)
     increaseDifficulty()
     scoreText.setText('Points: '+score);
     if(score === brickInfo.count.row*brickInfo.count.col*10) {
@@ -139,7 +137,3 @@ function startGame() {
 }
 
 // this function (needed only on JSFiddle) take care of loading the images from the remote server
-function handleRemoteImagesOnJSFiddle() {
-	game.load.baseURL = 'https://end3r.github.io/Gamedev-Phaser-Content-Kit/demos/';
-	game.load.crossOrigin = 'anonymous';
-}

@@ -4,8 +4,14 @@ describe("Ball", function() {
   });
 
   describe("ball properties", function() {
-    it("ball colour should be blue", function(){
-      expect(ball.colour).toEqual("blue")
-    })
+
+    it("ball should have a name", function(){
+      expect(ball.name).toBeTruthy();
+    });
+
+    it("ball should have an imgtag", function(){
+      expect(ball.imgPath).toBeTruthy();
+    });
+
   });
 });

@@ -20,5 +20,8 @@
   "dependencies": {
     "http-server": "^0.10.0",
     "phase-2-e": "^0.2.0"
+  },
+  "devDependencies": {
+    "jasmine-expect": "^3.7.1"
   }
 }
