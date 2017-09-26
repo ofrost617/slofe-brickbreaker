@@ -12,7 +12,7 @@ var livesText;
 var lifeLostText;
 var playing = false;
 var brick = new Brick;
-var bricks = new Bricks;
+var bricksSize = new Bricks;
 var startButton;
 
 function preload() {
@@ -71,13 +71,10 @@ function update() {
 }
 function initBricks() {
     bricks = game.add.group();
-		console.log(bricks)
-		console.log(brick)
-
-    for(c=0; c< bricks.col; c++) {
-        for(r=0; r<bricks.row; r++) {
+    for(c=0; c< bricksSize.col; c++) {
+        for(r=0; r<bricksSize.row; r++) {
             var brickX = (r*(brick.width+brick.padding))+brick.offset.left;
-            var brickY = (c*(brick.height+brickInfo.padding))+brick.offset.top;
+            var brickY = (c*(brick.height+brick.padding))+brick.offset.top;
             newBrick = game.add.sprite(brickX, brickY, 'brick');
             game.physics.enable(newBrick, Phaser.Physics.ARCADE);
             newBrick.body.immovable = true;
