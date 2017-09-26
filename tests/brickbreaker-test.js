@@ -32,10 +32,13 @@ module.exports = {
        .end();
    },
 
+   'Console.log client': function(client) {
+     console.log(client);
+     console.log(client)
+   },
 
-  'Phaser Game Boots Test' : function (client) {
-    var brickBreaker = client.page.brickBreaker();
-    brickBreaker.navigate()
-      .waitForElementVisible('body', 1000)
-  },
-};
+  // 'Phaser Game Boots Test' : function (client) {
+  //   client
+  //     .end();
+  // }
+}
