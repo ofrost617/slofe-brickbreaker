@@ -6,13 +6,14 @@ var bricks;
 var newBrick;
 var brickInfo;
 var scoreText;
-var score = 0;
-var lives = 3;
+var score = new Score;
+var lives = new Lives;
 var livesText;
 var lifeLostText;
 var playing = false;
 var brick = new Brick;
 var bricksSize = new Bricks;
+var bricksLeft = bricksSize.totalBricks()
 var startButton;
 
 function preload() {
@@ -52,7 +53,7 @@ function create() {
 
     textStyle = { font: '18px Arial', fill: '#0095DD' };
     scoreText = game.add.text(5, 5, 'Points: 0', textStyle);
-    livesText = game.add.text(game.world.width-5, 5, 'Lives: '+lives, textStyle);
+    livesText = game.add.text(game.world.width-5, 5, 'Lives: '+lives.current, textStyle);
     livesText.anchor.set(1,0);
     lifeLostText = game.add.text(game.world.width*0.5, game.world.height*0.5, 'Life lost, tap to continue', textStyle);
     lifeLostText.anchor.set(0.5);
@@ -85,15 +86,16 @@ function initBricks() {
 }
 function ballHitBrick(ball, brick) {
     var killTween = game.add.tween(brick.scale);
-    killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
+    killTween.to({x:0,y:10}, 200, Phaser.Easing.Linear.None);
     killTween.onComplete.addOnce(function(){
         brick.kill();
     }, this);
     killTween.start();
-    score += 10;
-    increaseDifficulty()
-    scoreText.setText('Points: '+score);
-    if(score === brickInfo.count.row*brickInfo.count.col*10) {
+		bricksLeft -= 1;
+    score.hitBrick();
+    increaseDifficulty();
+    scoreText.setText(bricksLeft);
+    if(bricksLeft <= 0) {
         alert('You won the game, congratulations!');
         location.reload();
     }
@@ -103,12 +105,14 @@ function increaseDifficulty() {
   // paddle.body.game.width -= 80
   // paddle.body.game.height = 90
   // console.log(paddle.body.game.width)
+	console.log('hello!')
+	// ball.body.velocity.add(10, -10);
 }
 
 function ballLeaveScreen() {
-    lives--;
-    if(lives) {
-        livesText.setText('Lives: '+lives);
+    lives.lose();
+    if(lives.current > 0) {
+        livesText.setText(lives.string());
         lifeLostText.visible = true;
         ball.reset(game.world.width*0.5, game.world.height-25);
         paddle.reset(game.world.width*0.5, game.world.height-5);

@@ -10,14 +10,19 @@ Score.prototype.currentTotal = function() {
     return sum
 }
 
-Score.prototype.point = function() {
-  this.points.push(10)
-}
-
 Score.prototype.totalPossible = function() {
   var bricks = new Bricks;
   var num = bricks.col * bricks.row * this.increment
   return num
 }
+
+Score.prototype.hitBrick = function() {
+  this.points.push(10)
+}
+
+Score.prototype.string = function() {
+  return "Score: " + this.currentTotal()
+}
+
 
 module.exports = Score;

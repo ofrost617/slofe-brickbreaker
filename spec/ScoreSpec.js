@@ -17,7 +17,13 @@ describe('Score', function() {
     })
 
 		it('should add points to score', function() {
-
+      var initScore = score.currentTotal()
+      score.hitBrick();
+      expect(score.currentTotal()).toEqual(initScore + score.increment)
 		});
 	});
+
+  it('renders a string', function() {
+    expect(score.string()).toEqual("Score: " + score.currentTotal())
+  })
 })
