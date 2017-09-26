@@ -30,20 +30,23 @@ function preload() {
 		game.load.image('cosby', 'img/cosby.png')
 
 }
+
+function buildBall() {
+	ball = game.add.sprite(game.world.width*0.5, game.world.height-25, 'ball');
+	ball.animations.add('wobble', [0,1,0,2,0,1,0,2,0], 24);
+	ball.anchor.set(0.5);
+	game.physics.enable(ball, Phaser.Physics.ARCADE);
+	ball.body.collideWorldBounds = true;
+	ball.body.bounce.set(1);
+	ball.checkWorldBounds = true;
+	ball.events.onOutOfBounds.add(ballLeaveScreen, this);
+}
+
 function create() {
 		game.add.sprite(-1, -1, 'cosby')
-
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.checkCollision.down = false;
-    ball = game.add.sprite(game.world.width*0.5, game.world.height-25, 'ball');
-    ball.animations.add('wobble', [0,1,0,2,0,1,0,2,0], 24);
-    ball.anchor.set(0.5);
-    game.physics.enable(ball, Phaser.Physics.ARCADE);
-    ball.body.collideWorldBounds = true;
-    ball.body.bounce.set(1);
-    ball.checkWorldBounds = true;
-    ball.events.onOutOfBounds.add(ballLeaveScreen, this);
-
+		buildBall();
     paddle = game.add.sprite(game.world.width*0.5, game.world.height-5, 'paddle');
     paddle.anchor.set(0.5,1);
     game.physics.enable(paddle, Phaser.Physics.ARCADE);
