@@ -27,6 +27,7 @@ function loadImages() {
 	game.load.image('cosby', 'img/cosby.png')
 }
 
+// preload takes care of preloading the assets
 function preload() {
 	game.stage.backgroundColor = '#eee';
   game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
