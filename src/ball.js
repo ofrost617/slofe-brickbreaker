@@ -1,4 +1,4 @@
 function Ball () {
   this.name = "ball"
-  this.imgPath = "img/ball.png"
+  this.imgPath = "img/egg.png"
 };

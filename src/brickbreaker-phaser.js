@@ -16,13 +16,13 @@ var bricksSize = new Bricks;
 var bricksLeft = bricksSize.totalBricks()
 var startButton;
 
+// preload takes care of preloading the assets
 function preload() {
 	game.stage.backgroundColor = '#eee';
-
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
-    game.load.image('paddle', 'img/paddle.png');
+    game.load.image(paddle.name, paddle.imgPath);
 		game.load.image(brick.name, brick.imgPath);
     game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
     game.load.spritesheet('button', 'img/button.png', 120, 40);
@@ -31,7 +31,10 @@ function preload() {
 }
 
 function buildBall() {
-	ball = game.add.sprite(game.world.width*0.5, game.world.height-25, 'ball');
+	ball = game.add.sprite(game.world.width*0.5, game.world.height-25, ball.name);
+    // ball.scale.x = (6)
+    // ball.scale.y = (6)
+    ball.scale.setTo(-2, -2);
 	ball.animations.add('wobble', [0,1,0,2,0,1,0,2,0], 24);
 	ball.anchor.set(0.5);
 	game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -41,12 +44,13 @@ function buildBall() {
 	ball.events.onOutOfBounds.add(ballLeaveScreen, this);
 }
 
+// function is executed one when everything is loaded and ready
 function create() {
 		game.add.sprite(-1, -1, 'cosby')
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.checkCollision.down = false;
 		buildBall();
-    paddle = game.add.sprite(game.world.width*0.5, game.world.height-5, 'paddle');
+    paddle = game.add.sprite(game.world.width*0.5, game.world.height-5, paddle.name);
     paddle.anchor.set(0.5,1);
     game.physics.enable(paddle, Phaser.Physics.ARCADE);
     paddle.body.immovable = true;
@@ -65,6 +69,8 @@ function create() {
     startButton.anchor.set(0.5);
 
 }
+
+// is executed on every frame
 function update() {
     game.physics.arcade.collide(ball, paddle, ballHitPaddle);
     game.physics.arcade.collide(ball, bricks, ballHitBrick);
@@ -115,7 +121,7 @@ function ballLeaveScreen() {
     if(lives.current > 0) {
         livesText.setText(lives.string());
         lifeLostText.visible = true;
-        ball.reset(game.world.width*0.5, game.world.height-25);
+        ball.reset(game.world.width*0.5, game.world.height-50);
         paddle.reset(game.world.width*0.5, game.world.height-5);
         game.input.onDown.addOnce(function(){
             lifeLostText.visible = false;
