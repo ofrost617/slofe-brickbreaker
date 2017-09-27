@@ -7,5 +7,5 @@ var Brick = function() {
     left: 60
   };
   this.name = 'brick'
-  this.imgPath = 'img/brick3.png'
+  this.imgPath = 'img/pickleRick.png'
 }

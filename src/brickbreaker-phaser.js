@@ -62,9 +62,9 @@ function buildPaddle() {
 
 function buildText() {
 	textStyle = { font: '18px Arial', fill: '#0095DD' };
-  scoreText = game.add.text(100, 5, 'Bricks left: ', textStyle);
+  scoreText = game.add.text(200, 5, 'Bricks left: ', textStyle);
   livesText = game.add.text(width-5, 5, 'Lives: '+lives.current, textStyle);
-  scorePoints = game.add.text(-5, 5, 'Points', textStyle);
+  scorePoints = game.add.text(10, 5, 'Points'+score.string(), textStyle);
   livesText.anchor.set(1,0);
 //   scorePoints.anchor.set(-2, 0);
   lifeLostText = game.add.text(width*0.5, height*0.5, 'Life lost, tap to continue', textStyle);
@@ -123,6 +123,7 @@ function ballHitBrick(ball, brick) {
     }, this);
     killTween.start();
 		bricksLeft -= 1;
+        runningScore;
     score.hitBrick();
     // increaseDifficulty();
     scorePoints.setText(runningScore);
