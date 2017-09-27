@@ -15,9 +15,20 @@ describe('Game feature', function() {
       preload();
       create();
       expect(window.bricksLeft).toEqual(35)
-      
 
+      console.log(bricks)
+      console.log("brick 2 here")
 
-    })
-  })
+      ballHitBrick(ball, bricks);
+      expect(window.bricksLeft).toEqual(34)
+    });
+  });
+
+  describe('Start button works', function() {
+    it('ball has a starting position', function() {
+      preload();
+      create();
+      expect(window.ball.position.x).toEqual(240);
+    });
+  });
 });
