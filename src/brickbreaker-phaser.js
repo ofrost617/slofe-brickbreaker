@@ -23,7 +23,7 @@ var height;
 
 
 function loadImages() {
-	game.load.image('paddle', 'img/paddle.png');
+	game.load.image(paddle.name, paddle.imgPath);
 	game.load.image(brick.name, brick.imgPath);
 	game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
 	game.load.spritesheet('button', 'img/button.png', 120, 40);
