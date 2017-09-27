@@ -128,15 +128,10 @@ function ballHitBrick(ball, brick) {
     killTween.start();
 		score.hitBrick();
 		bricksLeft -= 1;
-<<<<<<< HEAD
-        runningScore;
-    score.hitBrick();
-=======
 		runningScore ++
     // score.hitBrick();
 		scorePoints.setText(score.string());
 		scoreText.setText("Bricks: "+bricksLeft);
->>>>>>> 5f76949862f35e24ea855bc72be723f30c24ce9c
     // increaseDifficulty();
 
     if(bricksLeft <= 0) {

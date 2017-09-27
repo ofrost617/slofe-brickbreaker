@@ -16,7 +16,7 @@ describe('Brick', function() {
   describe('info', function() {
     it('brick has a name, path and padding', function() {
       expect(brick.name).toEqual('brick');
-      expect(brick.imgPath).toEqual('img/brick3.png');
+      expect(brick.imgPath).toEqual('img/pickleRick.png');
       expect(brick.padding).toEqual(10)
     });
   })
