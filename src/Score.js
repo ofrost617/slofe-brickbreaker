@@ -3,13 +3,12 @@
 var Score = function() {
   // this.points = []
   this.points = 0
-  // this.increment = 10
+  this.increment = 10
 }
 
-// Score.prototype.currentTotal = function() {
-//     var sum = this.points.reduce((x, y) => x + y, 0);
-//     return sum
-// }
+Score.prototype.currentTotal = function() {
+  return this.points
+}
 
 Score.prototype.totalPossible = function() {
   var bricks = new Bricks;
@@ -19,7 +18,7 @@ Score.prototype.totalPossible = function() {
 
 Score.prototype.hitBrick = function() {
   // this.points.push(10)
-  this.points += 10
+  this.points += this.increment
 }
 
 Score.prototype.string = function() {
