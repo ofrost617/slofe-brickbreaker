@@ -13,5 +13,3 @@ Lives.prototype.reset = function() {
 Lives.prototype.string = function() {
   return "Lives: " + this.current;
 }
-
-

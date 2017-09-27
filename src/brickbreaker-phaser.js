@@ -133,7 +133,10 @@ function ballHitBrick(ball, brick) {
 		// brick.kill();
 		killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
     killTween.onComplete.addOnce(function(){
+			console.log(brick)
+
 			brick.kill();
+
     }, this);
     killTween.start();
 		score.hitBrick();
