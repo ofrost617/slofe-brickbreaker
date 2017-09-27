@@ -15,23 +15,31 @@ var brick = new Brick;
 var bricksSize = new Bricks;
 var bricksLeft = bricksSize.totalBricks()
 var startButton;
+var width;
+var height;
+
+
+function loadImages() {
+	game.load.image('paddle', 'img/paddle.png');
+	game.load.image(brick.name, brick.imgPath);
+	game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
+	game.load.spritesheet('button', 'img/button.png', 120, 40);
+	game.load.image('cosby', 'img/cosby.png')
+}
 
 function preload() {
 	game.stage.backgroundColor = '#eee';
-
-    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
-    game.load.image('paddle', 'img/paddle.png');
-		game.load.image(brick.name, brick.imgPath);
-    game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
-    game.load.spritesheet('button', 'img/button.png', 120, 40);
-		game.load.image('cosby', 'img/cosby.png')
-
+  game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  game.scale.pageAlignHorizontally = true;
+  game.scale.pageAlignVertically = true;
+	loadImages();
 }
 
+
+
+
 function buildBall() {
-	ball = game.add.sprite(game.world.width*0.5, game.world.height-25, 'ball');
+	ball = game.add.sprite(width*0.5, height-25, 'ball');
 	ball.animations.add('wobble', [0,1,0,2,0,1,0,2,0], 24);
 	ball.anchor.set(0.5);
 	game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -41,37 +49,50 @@ function buildBall() {
 	ball.events.onOutOfBounds.add(ballLeaveScreen, this);
 }
 
-function create() {
-		game.add.sprite(-1, -1, 'cosby')
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.arcade.checkCollision.down = false;
-		buildBall();
-    paddle = game.add.sprite(game.world.width*0.5, game.world.height-5, 'paddle');
-    paddle.anchor.set(0.5,1);
-    game.physics.enable(paddle, Phaser.Physics.ARCADE);
-    paddle.body.immovable = true;
-
-    initBricks();
-
-    textStyle = { font: '18px Arial', fill: '#0095DD' };
-    scoreText = game.add.text(5, 5, 'Points: 0', textStyle);
-    livesText = game.add.text(game.world.width-5, 5, 'Lives: '+lives.current, textStyle);
-    livesText.anchor.set(1,0);
-    lifeLostText = game.add.text(game.world.width*0.5, game.world.height*0.5, 'Life lost, tap to continue', textStyle);
-    lifeLostText.anchor.set(0.5);
-    lifeLostText.visible = false;
-
-    startButton = game.add.button(game.world.width*0.5, game.world.height*0.5, 'button', startGame, this, 1, 0, 2);
-    startButton.anchor.set(0.5);
-
+function buildPaddle() {
+	paddle = game.add.sprite(width*0.5, height-5, 'paddle');
+	paddle.anchor.set(0.5,1);
+	game.physics.enable(paddle, Phaser.Physics.ARCADE);
+	paddle.body.immovable = true;
 }
+
+function buildText() {
+	textStyle = { font: '18px Arial', fill: '#0095DD' };
+  scoreText = game.add.text(5, 5, 'Points: 0', textStyle);
+  livesText = game.add.text(width-5, 5, 'Lives: '+lives.current, textStyle);
+  livesText.anchor.set(1,0);
+  lifeLostText = game.add.text(width*0.5, height*0.5, 'Life lost, tap to continue', textStyle);
+  lifeLostText.anchor.set(0.5);
+  lifeLostText.visible = false;
+}
+
+function buildStartButton() {
+	startButton = game.add.button(width*0.5, height*0.5, 'button', startGame, this, 1, 0, 2);
+	startButton.anchor.set(0.5);
+}
+
+
+function create() {
+	width = game.world.width
+	height = game.world.height
+	game.add.sprite(-1, -1, 'cosby')
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+  game.physics.arcade.checkCollision.down = false;
+	buildBall();
+	buildPaddle();
+  initBricks();
+	buildText();
+  buildStartButton();
+}
+
 function update() {
     game.physics.arcade.collide(ball, paddle, ballHitPaddle);
     game.physics.arcade.collide(ball, bricks, ballHitBrick);
     if(playing) {
-        paddle.x = game.input.x || game.world.width*0.5;
+        paddle.x = game.input.x || width*0.5;
     }
 }
+
 function initBricks() {
     bricks = game.add.group();
     for(c=0; c< bricksSize.col; c++) {
@@ -86,9 +107,10 @@ function initBricks() {
         }
     }
 }
+
 function ballHitBrick(ball, brick) {
     var killTween = game.add.tween(brick.scale);
-		brick.kill();
+		// brick.kill();
 		killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
     killTween.onComplete.addOnce(function(){
 			brick.kill();
@@ -96,7 +118,7 @@ function ballHitBrick(ball, brick) {
     killTween.start();
 		bricksLeft -= 1;
     score.hitBrick();
-    increaseDifficulty();
+    // increaseDifficulty();
     scoreText.setText(bricksLeft);
     if(bricksLeft <= 0) {
         alert('You won the game, congratulations!');
@@ -109,14 +131,21 @@ function increaseDifficulty() {
 	// ball.body.velocity.add(300, -300);
 	// window.paddle.scale.x -= 0.1
 }
+function loseLife() {
+	livesText.setText(lives.string());
+	lifeLostText.visible = true;
+}
+
+function resetBallPaddle() {
+	ball.reset(width*0.5, height-25);
+	paddle.reset(width*0.5, height-5);
+}
 
 function ballLeaveScreen() {
     lives.lose();
     if(lives.current > 0) {
-        livesText.setText(lives.string());
-        lifeLostText.visible = true;
-        ball.reset(game.world.width*0.5, game.world.height-25);
-        paddle.reset(game.world.width*0.5, game.world.height-5);
+				loseLife();
+        resetBallPaddle();
         game.input.onDown.addOnce(function(){
             lifeLostText.visible = false;
             ball.body.velocity.set(150, -150);
