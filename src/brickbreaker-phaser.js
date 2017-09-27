@@ -27,7 +27,7 @@ function loadImages() {
 	game.load.image(brick.name, brick.imgPath);
 	game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
 	game.load.spritesheet('button', 'img/button.png', 120, 40);
-	game.load.image('cosby', 'img/morty1.png')
+	game.load.image('cosby', 'img/bg2.jpg')
 }
 
 function loadSounds() {
@@ -145,7 +145,8 @@ function ballHitBrick(ball, brick) {
     // increaseDifficulty();
 
     if(bricksLeft <= 0) {
-        alert('You won the game, congratulations!');
+        alert('Way to go Morty, you *buuuuurrpp* killed Rick!');
+        alert("Oh Jeez Rick I did-- I duh-- didn't meant to! Oh jeez oh god")
         location.reload()
     }
 		ballHit.play()
