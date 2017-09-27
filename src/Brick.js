@@ -7,7 +7,7 @@ var Brick = function() {
     left: 60
   };
   this.name = 'brick'
-  this.imgPath = 'img/brick.png'
+  this.imgPath = 'img/brick3.png'
 }
 
 module.exports = Brick;
