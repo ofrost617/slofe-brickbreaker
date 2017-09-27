@@ -9,5 +9,3 @@ var Brick = function() {
   this.name = 'brick'
   this.imgPath = 'img/brick3.png'
 }
-
-module.exports = Brick;

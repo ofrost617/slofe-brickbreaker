@@ -6,6 +6,3 @@ var Bricks = function() {
 Bricks.prototype.totalBricks = function() {
   return this.row * this.col
 }
-
-
-module.exports = Bricks;
