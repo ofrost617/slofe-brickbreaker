@@ -14,4 +14,4 @@ Lives.prototype.string = function() {
   return "Lives: " + this.current;
 }
 
-module.exports = Lives;
+

@@ -7,6 +7,9 @@ var newBrick;
 var brickInfo;
 var scoreText;
 var score = new Score;
+var scorePoints;
+var runningScore = score.string();
+// var scorePoints = score.string;
 var lives = new Lives;
 var livesText;
 var lifeLostText;
@@ -59,9 +62,11 @@ function buildPaddle() {
 
 function buildText() {
 	textStyle = { font: '18px Arial', fill: '#0095DD' };
-  scoreText = game.add.text(5, 5, 'Points: 0', textStyle);
+  scoreText = game.add.text(100, 5, 'Bricks left: ', textStyle);
   livesText = game.add.text(width-5, 5, 'Lives: '+lives.current, textStyle);
+  scorePoints = game.add.text(-5, 5, 'Points', textStyle);
   livesText.anchor.set(1,0);
+//   scorePoints.anchor.set(-2, 0);
   lifeLostText = game.add.text(width*0.5, height*0.5, 'Life lost, tap to continue', textStyle);
   lifeLostText.anchor.set(0.5);
   lifeLostText.visible = false;
@@ -120,6 +125,8 @@ function ballHitBrick(ball, brick) {
 		bricksLeft -= 1;
     score.hitBrick();
     // increaseDifficulty();
+    scorePoints.setText(runningScore);
+    console.log(score.string())
     scoreText.setText(bricksLeft);
     if(bricksLeft <= 0) {
         alert('You won the game, congratulations!');

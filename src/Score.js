@@ -24,5 +24,3 @@ Score.prototype.string = function() {
   return "Score: " + this.currentTotal()
 }
 
-
-module.exports = Score;
