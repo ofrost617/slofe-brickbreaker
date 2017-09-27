@@ -31,8 +31,8 @@ function loadImages() {
 }
 
 function loadSounds() {
-	game.load.audio('ballHit', 'audio/oi.wav');
-	game.load.audio('paddleHit', 'audio/growl.mp3');
+	game.load.audio('ballHit', 'audio/rickBurp.wav');
+	game.load.audio('paddleHit', 'audio/oi.wav');
 	// game.load.audio('theme', 'audio/theme.mp3')
 }
 
@@ -49,7 +49,7 @@ function preload() {
 function buildBall() {
 	ball = game.add.sprite(width*0.5, height-25, 'ball');
 	ball.scale.setTo(1,1);
-	ballHit = game.add.audio('ballHit', 0.5)
+	ballHit = game.add.audio('ballHit', 1)
 	ball.animations.add('wobble', [0,1,0,2,0,1,0,2,0], 24);
 	ball.anchor.set(0.5);
 	game.physics.enable(ball, Phaser.Physics.ARCADE);
