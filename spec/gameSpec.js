@@ -1,7 +1,7 @@
-describe('Ball hits brick', function() {
+describe('Game feature', function() {
 
-  describe('lose', function() {
-    it('lose a life after hitting a ball', function() {
+  describe('Ball goes out of a bounds', function() {
+    it('lose a life', function() {
       preload();
       create();
       expect(window.lives.current).toEqual(3);
@@ -9,4 +9,15 @@ describe('Ball hits brick', function() {
       expect(window.lives.current).toEqual(2);
     });
   });
+
+  describe('Brickcount goes down', function() {
+    it('removes brick ones hit', function() {
+      preload();
+      create();
+      expect(window.bricksLeft).toEqual(35)
+      
+
+
+    })
+  })
 });
