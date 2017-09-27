@@ -8,7 +8,7 @@ var brickInfo;
 var scoreText;
 var score = new Score;
 var scorePoints;
-var runningScore = score.string();
+var runningScore = score.points
 // var scorePoints = score.string;
 var lives = new Lives;
 var livesText;
@@ -23,7 +23,7 @@ var height;
 
 
 function loadImages() {
-	game.load.image('paddle', 'img/paddle.png');
+	game.load.image(paddle.name, paddle.imgPath);
 	game.load.image(brick.name, brick.imgPath);
 	game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
 	game.load.spritesheet('button', 'img/button.png', 120, 40);
@@ -62,10 +62,14 @@ function buildPaddle() {
 
 function buildText() {
 	textStyle = { font: '18px Arial', fill: '#0095DD' };
-  scoreText = game.add.text(200, 5, 'Bricks left: ', textStyle);
+  scoreText = game.add.text(100, 5, 'Bricks left: '+ bricksLeft, textStyle);
   livesText = game.add.text(width-5, 5, 'Lives: '+lives.current, textStyle);
-  scorePoints = game.add.text(10, 5, 'Points'+score.string(), textStyle);
+  scorePoints = game.add.text(10, 5, "" + score.string(), textStyle);
+	// line 135 and 136?
+	// scorePoints.setText(score.string());
+	// scoreText.setText("Bricks: "+bricksLeft);
   livesText.anchor.set(1,0);
+	// scorePoints.anchor.set(-0.5,5);
 //   scorePoints.anchor.set(-2, 0);
   lifeLostText = game.add.text(width*0.5, height*0.5, 'Life lost, tap to continue', textStyle);
   lifeLostText.anchor.set(0.5);
@@ -122,16 +126,22 @@ function ballHitBrick(ball, brick) {
 			brick.kill();
     }, this);
     killTween.start();
+		score.hitBrick();
 		bricksLeft -= 1;
+<<<<<<< HEAD
         runningScore;
     score.hitBrick();
+=======
+		runningScore ++
+    // score.hitBrick();
+		scorePoints.setText(score.string());
+		scoreText.setText("Bricks: "+bricksLeft);
+>>>>>>> 5f76949862f35e24ea855bc72be723f30c24ce9c
     // increaseDifficulty();
-    scorePoints.setText(runningScore);
-    console.log(score.string())
-    scoreText.setText(bricksLeft);
+
     if(bricksLeft <= 0) {
         alert('You won the game, congratulations!');
-        location.reload();
+        location.reload()
     }
 }
 
