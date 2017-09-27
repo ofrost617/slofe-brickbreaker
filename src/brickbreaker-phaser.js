@@ -27,7 +27,7 @@ function loadImages() {
 	game.load.image(brick.name, brick.imgPath);
 	game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
 	game.load.spritesheet('button', 'img/button.png', 120, 40);
-	game.load.image('cosby', 'img/cosby.png')
+	game.load.image('cosby', 'img/coding.jpeg')
 }
 
 // preload takes care of preloading the assets
