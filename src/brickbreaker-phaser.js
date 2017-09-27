@@ -27,6 +27,12 @@ function loadImages() {
 	game.load.image('cosby', 'img/cosby.png')
 }
 
+function loadSounds() {
+	game.load.audio('ballHit', 'audio/oi.wav');
+	game.load.audio('paddleHit', 'audio/growl.mp3');
+	// game.load.audio('theme', 'audio/theme.mp3')
+}
+
 // preload takes care of preloading the assets
 function preload() {
 	game.stage.backgroundColor = '#eee';
@@ -34,13 +40,13 @@ function preload() {
   game.scale.pageAlignHorizontally = true;
   game.scale.pageAlignVertically = true;
 	loadImages();
+	loadSounds()
 }
-
-
-
 
 function buildBall() {
 	ball = game.add.sprite(width*0.5, height-25, 'ball');
+	ball.scale.setTo(1,1);
+	ballHit = game.add.audio('ballHit', 0.5)
 	ball.animations.add('wobble', [0,1,0,2,0,1,0,2,0], 24);
 	ball.anchor.set(0.5);
 	game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -52,6 +58,8 @@ function buildBall() {
 
 function buildPaddle() {
 	paddle = game.add.sprite(width*0.5, height-5, 'paddle');
+	paddleHit = game.add.audio('paddleHit')
+	paddleHit.volume = 0.3;
 	paddle.anchor.set(0.5,1);
 	game.physics.enable(paddle, Phaser.Physics.ARCADE);
 	paddle.body.immovable = true;
@@ -74,6 +82,8 @@ function buildStartButton() {
 
 
 function create() {
+	theme = game.add.audio('theme')
+	theme.play()
 	width = game.world.width
 	height = game.world.height
 	game.add.sprite(-1, -1, 'cosby')
@@ -125,6 +135,7 @@ function ballHitBrick(ball, brick) {
         alert('You won the game, congratulations!');
         location.reload();
     }
+		ballHit.play()
 }
 
 function increaseDifficulty() {
@@ -158,8 +169,9 @@ function ballLeaveScreen() {
     }
 }
 function ballHitPaddle(ball, paddle) {
-    ball.animations.play('wobble');
+		ball.animations.play('wobble');
     ball.body.velocity.x = -1*5*(paddle.x-ball.x);
+		paddleHit.play()
 }
 function startGame() {
     startButton.destroy();
