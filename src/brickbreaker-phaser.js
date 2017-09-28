@@ -30,7 +30,7 @@ function loadImages() {
 function loadSounds() {
 	game.load.audio('ballHit', 'audio/oi.wav');
 	game.load.audio('paddleHit', 'audio/growl.mp3');
-	// game.load.audio('theme', 'audio/theme.mp3')
+	game.load.audio('theme', 'audio/Terryfold.mp3')
 }
 
 // preload takes care of preloading the assets
