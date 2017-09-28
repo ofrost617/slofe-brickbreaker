@@ -2,15 +2,15 @@ var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
   preload: preload,
   create: create,
   update: update,
-  playing: false
+  playing: false,
+  scorePoints: null,
+  livesText: null,
+  lifeLostText: null,
 });
 
 
 var score = new Score();
-var scorePoints;
 var lives = new Lives();
-var livesText;
-var lifeLostText;
 var bricksSize = new Bricks();
 var bricksLeft = bricksSize.totalBricks();
 
@@ -65,20 +65,19 @@ function buildPaddle() {
 }
 
 function buildText() {
-	var totalBricks = bricksSize.totalBricks();
   textStyle = { font: "18px Arial", fill: "#0095DD" };
-  scoreText = game.add.text(100, 5, "Bricks left: " + totalBricks, textStyle);
-  livesText = game.add.text(game.world.width - 5, 5, "Lives: " + lives.current, textStyle);
-  scorePoints = game.add.text(10, 5, "" + score.string(), textStyle);
-  livesText.anchor.set(1, 0);
-  lifeLostText = game.add.text(
+  scoreText = game.add.text(100, 5, "Bricks left: " + bricksLeft, textStyle);
+  game.livesText = game.add.text(game.world.width - 5, 5, "Lives: " + lives.current, textStyle);
+  game.scorePoints = game.add.text(10, 5, "" + score.string(), textStyle);
+  game.livesText.anchor.set(1, 0);
+  game.lifeLostText = game.add.text(
     game.world.width * 0.5,
     game.world.height * 0.5,
     "Life lost, tap to continue",
     textStyle
   );
-  lifeLostText.anchor.set(0.5);
-  lifeLostText.visible = false;
+  game.lifeLostText.anchor.set(0.5);
+  game.lifeLostText.visible = false;
 }
 
 function buildStartButton() {
@@ -101,6 +100,7 @@ function create() {
   game.add.sprite(-1, -1, "cosby");
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.arcade.checkCollision.down = false;
+
   buildBall();
   buildPaddle();
   initBricks();
@@ -144,7 +144,7 @@ function ballHitBrick(ball, brick) {
   killTween.start();
   score.hitBrick();
   bricksLeft -= 1;
-  scorePoints.setText(score.string());
+  game.scorePoints.setText(score.string());
   scoreText.setText("Bricks: " + bricksLeft);
   // increaseDifficulty();
 
@@ -162,8 +162,8 @@ function increaseDifficulty() {
   // window.paddle.scale.x -= 0.1
 }
 function loseLife() {
-  livesText.setText(lives.string());
-  lifeLostText.visible = true;
+  game.livesText.setText(lives.string());
+  game.lifeLostText.visible = true;
 }
 
 function resetBallPaddle() {
@@ -177,7 +177,7 @@ function ballLeaveScreen() {
     loseLife();
     resetBallPaddle();
     game.input.onDown.addOnce(function() {
-      lifeLostText.visible = false;
+      game.lifeLostText.visible = false;
       ball.body.velocity.set(150, -150);
     }, this);
   } else {
