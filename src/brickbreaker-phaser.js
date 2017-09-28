@@ -28,7 +28,8 @@ function loadImages() {
 
 function loadSounds() {
 	game.load.audio('ballHit', 'audio/rickBurp.wav');
-	game.load.audio('paddleHit', 'audio/oi.wav');
+	game.load.audio('paddleHit', 'audio/yes.wav');
+	game.load.audio('loseLife', 'audio/ohJeez.wav');
 	game.load.audio('theme', 'audio/Terryfold.mp3')
 }
 
@@ -45,7 +46,7 @@ function preload() {
 function buildBall() {
   ball = game.add.sprite(game.world.width * 0.5, game.world.height - 25, "ball");
   ball.scale.setTo(1, 1);
-  ballHit = game.add.audio("ballHit", 1);
+  ballHitSFX = game.add.audio("ballHit", 1);
   ball.animations.add("wobble", [0, 1, 0, 2, 0, 1, 0, 2, 0], 24);
   ball.anchor.set(0.5);
   game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -57,7 +58,7 @@ function buildBall() {
 
 function buildPaddle() {
   paddle = game.add.sprite(game.world.width * 0.5, game.world.height - 5, "paddle");
-  paddleHit = game.add.audio("paddleHit", 0.2);
+  paddleHitSFX = game.add.audio("paddleHit", 1);
   paddle.anchor.set(0.5, 1);
   game.physics.enable(paddle, Phaser.Physics.ARCADE);
   paddle.body.immovable = true;
@@ -152,7 +153,7 @@ function ballHitBrick(ball, brick) {
     alert("Oh Jeez Rick I did-- I duh-- didn't meant to! Oh jeez oh god");
     location.reload();
   }
-  ballHit.play();
+  ballHitSFX.play();
 }
 
 function increaseDifficulty() {
@@ -171,6 +172,8 @@ function resetBallPaddle() {
 }
 
 function ballLeaveScreen() {
+	loseLifeSFX = game.add.audio('loseLife', 0.6)
+	loseLifeSFX.play()
   lives.lose();
   if (lives.current > 0) {
     loseLife();
@@ -187,7 +190,7 @@ function ballLeaveScreen() {
 function ballHitPaddle(ball, paddle) {
   ball.animations.play("wobble");
   ball.body.velocity.x = -1 * 5 * (paddle.x - ball.x);
-  paddleHit.play();
+  paddleHitSFX.play();
 }
 function startGame(startButton) {
   startButton.destroy();
