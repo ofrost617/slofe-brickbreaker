@@ -96,6 +96,7 @@ function buildStartButton() {
 
 function create() {
   theme = game.add.audio("theme");
+	theme.volume = 0.3
   theme.play();
   game.add.sprite(-1, -1, "cosby");
   game.physics.startSystem(Phaser.Physics.ARCADE);
