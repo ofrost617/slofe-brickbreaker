@@ -3,4 +3,4 @@ function Ball () {
   this.imgPath = "img/m.png"
 };
 
-module.exports = Ball;
+// module.exports = Ball;
