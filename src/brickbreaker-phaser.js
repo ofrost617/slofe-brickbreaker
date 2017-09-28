@@ -1,21 +1,19 @@
 var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
   preload: preload,
   create: create,
-  update: update
+  update: update,
+  playing: false
 });
+
 
 var score = new Score();
 var scorePoints;
-var runningScore = score.points;
-// var scorePoints = score.string;
 var lives = new Lives();
 var livesText;
 var lifeLostText;
-var playing = false;
 var bricksSize = new Bricks();
 var bricksLeft = bricksSize.totalBricks();
-var width;
-var height;
+
 
 function loadImages() {
   var paddle = new Paddle();
@@ -31,7 +29,7 @@ function loadImages() {
 function loadSounds() {
   game.load.audio("ballHit", "audio/rickBurp.wav");
   game.load.audio("paddleHit", "audio/oi.wav");
-  // game.load.audio('theme', 'audio/theme.mp3')
+  game.load.audio('theme', 'audio/theme.mp3')  
 }
 
 // preload takes care of preloading the assets
@@ -45,7 +43,7 @@ function preload() {
 }
 
 function buildBall() {
-  ball = game.add.sprite(width * 0.5, height - 25, "ball");
+  ball = game.add.sprite(game.world.width * 0.5, game.world.height - 25, "ball");
   ball.scale.setTo(1, 1);
   ballHit = game.add.audio("ballHit", 1);
   ball.animations.add("wobble", [0, 1, 0, 2, 0, 1, 0, 2, 0], 24);
@@ -58,7 +56,7 @@ function buildBall() {
 }
 
 function buildPaddle() {
-  paddle = game.add.sprite(width * 0.5, height - 5, "paddle");
+  paddle = game.add.sprite(game.world.width * 0.5, game.world.height - 5, "paddle");
   paddleHit = game.add.audio("paddleHit");
   paddleHit.volume = 0.3;
   paddle.anchor.set(0.5, 1);
@@ -70,12 +68,12 @@ function buildText() {
 	var totalBricks = bricksSize.totalBricks();
   textStyle = { font: "18px Arial", fill: "#0095DD" };
   scoreText = game.add.text(100, 5, "Bricks left: " + totalBricks, textStyle);
-  livesText = game.add.text(width - 5, 5, "Lives: " + lives.current, textStyle);
+  livesText = game.add.text(game.world.width - 5, 5, "Lives: " + lives.current, textStyle);
   scorePoints = game.add.text(10, 5, "" + score.string(), textStyle);
   livesText.anchor.set(1, 0);
   lifeLostText = game.add.text(
-    width * 0.5,
-    height * 0.5,
+    game.world.width * 0.5,
+    game.world.height * 0.5,
     "Life lost, tap to continue",
     textStyle
   );
@@ -85,8 +83,8 @@ function buildText() {
 
 function buildStartButton() {
   var startButton = game.add.button(
-    width * 0.5,
-    height * 0.5,
+    game.world.width * 0.5,
+    game.world.height * 0.5,
     "button",
     startGame,
     this,
@@ -100,8 +98,6 @@ function buildStartButton() {
 function create() {
   theme = game.add.audio("theme");
   theme.play();
-  width = game.world.width;
-  height = game.world.height;
   game.add.sprite(-1, -1, "cosby");
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.arcade.checkCollision.down = false;
@@ -115,8 +111,8 @@ function create() {
 function update() {
   game.physics.arcade.collide(ball, paddle, ballHitPaddle);
   game.physics.arcade.collide(ball, bricks, ballHitBrick);
-  if (playing) {
-    paddle.x = game.input.x || width * 0.5;
+  if (game.playing) {
+    paddle.x = game.input.x || game.world.width * 0.5;
   }
 }
 
@@ -148,8 +144,6 @@ function ballHitBrick(ball, brick) {
   killTween.start();
   score.hitBrick();
   bricksLeft -= 1;
-  runningScore++;
-  // score.hitBrick();
   scorePoints.setText(score.string());
   scoreText.setText("Bricks: " + bricksLeft);
   // increaseDifficulty();
@@ -173,8 +167,8 @@ function loseLife() {
 }
 
 function resetBallPaddle() {
-  ball.reset(width * 0.5, height - 25);
-  paddle.reset(width * 0.5, height - 5);
+  ball.reset(game.world.width * 0.5, game.world.height - 25);
+  paddle.reset(game.world.width * 0.5, game.world.height - 5);
 }
 
 function ballLeaveScreen() {
@@ -199,5 +193,7 @@ function ballHitPaddle(ball, paddle) {
 function startGame(startButton) {
   startButton.destroy();
   ball.body.velocity.set(150, -150);
-  playing = true;
+  game.playing = true;
 }
+
+
