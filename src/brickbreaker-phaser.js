@@ -134,6 +134,7 @@ function initBricks() {
 function ballHitBrick(ball, brick) {
   var killTween = game.add.tween(brick.scale);
   // brick.kill();
+  bricksLeft -= 1;
   killTween.to({ x: 0, y: 0 }, 200, Phaser.Easing.Linear.None);
   killTween.onComplete.addOnce(function() {
     console.log(brick);
@@ -142,7 +143,7 @@ function ballHitBrick(ball, brick) {
   }, this);
   killTween.start();
   score.hitBrick();
-  bricksLeft -= 1;
+
   game.scorePoints.setText(score.string());
   scoreText.setText("Bricks: " + bricksLeft);
   // increaseDifficulty();
