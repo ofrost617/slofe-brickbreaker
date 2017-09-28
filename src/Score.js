@@ -1,13 +1,13 @@
 // var brick = require('./Bricks.js');
 
 var Score = function() {
-  this.points = []
+  // this.points = []
+  this.points = 0
   this.increment = 10
 }
 
 Score.prototype.currentTotal = function() {
-    var sum = this.points.reduce((x, y) => x + y, 0);
-    return sum
+  return this.points
 }
 
 Score.prototype.totalPossible = function() {
@@ -17,12 +17,12 @@ Score.prototype.totalPossible = function() {
 }
 
 Score.prototype.hitBrick = function() {
-  this.points.push(10)
+  // this.points.push(10)
+  this.points += this.increment
 }
 
 Score.prototype.string = function() {
-  return "Score: " + this.currentTotal()
+  // return "Score: " + this.currentTotal()
+  return "Score: " + this.points
+
 }
-
-
-module.exports = Score;
