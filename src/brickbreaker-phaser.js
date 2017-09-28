@@ -27,9 +27,9 @@ function loadImages() {
 }
 
 function loadSounds() {
-  game.load.audio("ballHit", "audio/rickBurp.wav");
-  game.load.audio("paddleHit", "audio/oi.wav");
-  game.load.audio('theme', 'audio/theme.mp3')  
+	game.load.audio('ballHit', 'audio/rickBurp.wav');
+	game.load.audio('paddleHit', 'audio/oi.wav');
+	game.load.audio('theme', 'audio/Terryfold.mp3')
 }
 
 // preload takes care of preloading the assets
@@ -57,8 +57,7 @@ function buildBall() {
 
 function buildPaddle() {
   paddle = game.add.sprite(game.world.width * 0.5, game.world.height - 5, "paddle");
-  paddleHit = game.add.audio("paddleHit");
-  paddleHit.volume = 0.3;
+  paddleHit = game.add.audio("paddleHit", 0.2);
   paddle.anchor.set(0.5, 1);
   game.physics.enable(paddle, Phaser.Physics.ARCADE);
   paddle.body.immovable = true;
@@ -95,7 +94,7 @@ function buildStartButton() {
 }
 
 function create() {
-  theme = game.add.audio("theme");
+  theme = game.add.audio("theme", 0.1);
   theme.play();
   game.add.sprite(-1, -1, "cosby");
   game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -195,5 +194,3 @@ function startGame(startButton) {
   ball.body.velocity.set(150, -150);
   game.playing = true;
 }
-
-
