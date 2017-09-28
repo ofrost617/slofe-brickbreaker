@@ -6,6 +6,7 @@ var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
   scorePoints: null,
   livesText: null,
   lifeLostText: null,
+	paddleXVelocity: null
 });
 
 
@@ -95,7 +96,7 @@ function buildStartButton() {
 }
 
 function create() {
-  theme = game.add.audio("theme", 0.1);
+  theme = game.add.audio("theme", 0.1, true);
   theme.play();
   game.add.sprite(-1, -1, "cosby");
   game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -134,13 +135,12 @@ function initBricks() {
 
 function ballHitBrick(ball, brick) {
   var killTween = game.add.tween(brick.scale);
-  // brick.kill();
-  killTween.to({ x: 0, y: 0 }, 200, Phaser.Easing.Linear.None);
-  killTween.onComplete.addOnce(function() {
-    console.log(brick);
-
-    brick.kill();
-  }, this);
+  brick.kill();
+  // killTween.to({ x: 0, y: 0 }, 200, Phaser.Easing.Linear.None);
+  // killTween.onComplete.addOnce(function() {
+  //   console.log(brick);
+  //   brick.kill();
+  // }, this);
   killTween.start();
   score.hitBrick();
   bricksLeft -= 1;
@@ -151,7 +151,7 @@ function ballHitBrick(ball, brick) {
   if (bricksLeft <= 0) {
     alert("Way to go Morty, you *buuuuurrpp* killed Rick!");
     alert("Oh Jeez Rick I did-- I duh-- didn't meant to! Oh jeez oh god");
-    location.reload();
+    create()
   }
   ballHitSFX.play();
 }
@@ -189,7 +189,7 @@ function ballLeaveScreen() {
 }
 function ballHitPaddle(ball, paddle) {
   ball.animations.play("wobble");
-  ball.body.velocity.x = -1 * 5 * (paddle.x - ball.x);
+  ball.body.velocity.x += -1 * 5 * (paddle.x - ball.x);
   paddleHitSFX.play();
 }
 function startGame(startButton) {
