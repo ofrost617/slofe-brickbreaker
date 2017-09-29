@@ -52,7 +52,7 @@ function loadSounds() {
 	game.load.audio('ballHit', 'audio/rickBurp.wav');
 	game.load.audio('paddleHit', 'audio/yes.wav');
 	game.load.audio('loseLife', 'audio/ohJeez.wav');
-	game.load.audio('theme', 'audio/moonman.mp3')
+	game.load.audio('theme', 'audio/moonman.wav')
 }
 
 // preload takes care of preloading the assets
