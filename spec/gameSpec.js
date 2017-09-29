@@ -1,3 +1,5 @@
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
 describe('Game feature', function() {
 
   describe('Ball goes out of a bounds', function() {
@@ -11,16 +13,17 @@ describe('Game feature', function() {
   });
 
   describe('Brickcount goes down', function() {
-    it('removes brick ones hit', function() {
-      preload();
-      create();
-      expect(window.bricksLeft).toEqual(35)
+    it('removes brick ones hit', function(done) {
 
-      console.log(bricks)
-      console.log("brick 2 here")
 
-      ballHitBrick(ball, bricks);
-      expect(window.bricksLeft).toEqual(34)
+      setTimeout(function() {
+        startGame();
+        expect(window.bricksLeft).toEqual(28);
+        setTimeout(function() {
+          expect(window.bricksLeft).toEqual(27);
+          done();
+        }, 5000);
+      }, 2000);
     });
   });
 
