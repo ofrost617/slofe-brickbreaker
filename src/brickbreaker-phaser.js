@@ -213,6 +213,9 @@ function startMyGame() {
   }
 
   window.startGame = startGame;
+  window.preload = preload;
+  window.create = create;
+  window.ballLeaveScreen = ballLeaveScreen;
 
 }
 
