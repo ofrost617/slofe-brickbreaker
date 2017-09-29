@@ -45,7 +45,7 @@ function loadImages() {
   game.load.image(brick.name, brick.imgPath);
   game.load.spritesheet(ball.name, ball.imgPath, 20, 20);
   game.load.spritesheet("button", "img/button.png", 120, 40);
-  game.load.image("cosby", "img/bg2.jpg");
+  game.load.image("background", "img/bg2.jpg");
 }
 
 function loadSounds() {
@@ -117,9 +117,9 @@ function buildStartButton() {
 }
 
 function create() {
-  theme = game.add.audio("theme", 0.2, true);
+  theme = game.add.audio("theme", 0.1, true);
   theme.play();
-  game.add.sprite(-1, -1, "cosby");
+  game.add.sprite(-1, -1, "background");
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.arcade.checkCollision.down = false;
 
@@ -194,7 +194,7 @@ function resetBallPaddle() {
 }
 
 function ballLeaveScreen() {
-	loseLifeSFX = game.add.audio('loseLife', 0.6)
+	loseLifeSFX = game.add.audio('loseLife', 1)
 	loseLifeSFX.play()
   lives.lose();
   if (lives.current > 0) {
