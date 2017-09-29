@@ -1,20 +1,41 @@
-var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
-  preload: preload,
-  create: create,
-  update: update,
-  playing: false,
-  scorePoints: null,
-  livesText: null,
-  lifeLostText: null,
-	paddleXVelocity: null
-});
+
+function MyGame(){
+  this.game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
+    preload: preload,
+    create: create,
+    update: update,
+    playing: false,
+    scorePoints: null,
+    livesText: null,
+    lifeLostText: null,
+  	paddleXVelocity: null
+  });
+  this.lives = new Lives()
+  this.score = new Score()
+  this.bricksSize = new Bricks
+}
 
 
-var score = new Score();
-var lives = new Lives();
-var bricksSize = new Bricks();
-var bricksLeft = bricksSize.totalBricks();
+// var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
+//   preload: preload,
+//   create: create,
+//   update: update,
+//   playing: false,
+//   scorePoints: null,
+//   livesText: null,
+//   lifeLostText: null,
+// 	paddleXVelocity: null
+// });
 
+// works but with globals //
+var myGame = new MyGame()
+var game = myGame.game
+var lives = myGame.lives
+var score = myGame.score
+// end of works but with globals //
+
+var bricksSize = myGame.bricksSize
+var bricksLeft = myGame.bricksSize.totalBricks();
 
 function loadImages() {
   var paddle = new Paddle();
@@ -96,7 +117,7 @@ function buildStartButton() {
 }
 
 function create() {
-  theme = game.add.audio("theme", 0.1, true);
+  theme = game.add.audio("theme", 0.6, true);
   theme.play();
   game.add.sprite(-1, -1, "cosby");
   game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -151,16 +172,17 @@ function ballHitBrick(ball, brick) {
   if (bricksLeft <= 0) {
     alert("Way to go Morty, you *buuuuurrpp* killed Rick!");
     alert("Oh Jeez Rick I did-- I duh-- didn't meant to! Oh jeez oh god");
-    create()
+    location.reload()
   }
   ballHitSFX.play();
 }
 
-function increaseDifficulty() {
+// function increaseDifficulty() {
   // console.log('hello!')
   // ball.body.velocity.add(300, -300);
   // window.paddle.scale.x -= 0.1
-}
+// }
+
 function loseLife() {
   game.livesText.setText(lives.string());
   game.lifeLostText.visible = true;
