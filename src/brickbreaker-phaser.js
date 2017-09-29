@@ -6,6 +6,7 @@ var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
   scorePoints: null,
   livesText: null,
   lifeLostText: null,
+	paddleXVelocity: null
 });
 
 
@@ -28,7 +29,8 @@ function loadImages() {
 
 function loadSounds() {
 	game.load.audio('ballHit', 'audio/rickBurp.wav');
-	game.load.audio('paddleHit', 'audio/oi.wav');
+	game.load.audio('paddleHit', 'audio/yes.wav');
+	game.load.audio('loseLife', 'audio/ohJeez.wav');
 	game.load.audio('theme', 'audio/Terryfold.mp3')
 }
 
@@ -45,7 +47,7 @@ function preload() {
 function buildBall() {
   ball = game.add.sprite(game.world.width * 0.5, game.world.height - 25, "ball");
   ball.scale.setTo(1, 1);
-  ballHit = game.add.audio("ballHit", 1);
+  ballHitSFX = game.add.audio("ballHit", 1);
   ball.animations.add("wobble", [0, 1, 0, 2, 0, 1, 0, 2, 0], 24);
   ball.anchor.set(0.5);
   game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -57,7 +59,7 @@ function buildBall() {
 
 function buildPaddle() {
   paddle = game.add.sprite(game.world.width * 0.5, game.world.height - 5, "paddle");
-  paddleHit = game.add.audio("paddleHit", 0.2);
+  paddleHitSFX = game.add.audio("paddleHit", 1);
   paddle.anchor.set(0.5, 1);
   game.physics.enable(paddle, Phaser.Physics.ARCADE);
   paddle.body.immovable = true;
@@ -94,7 +96,7 @@ function buildStartButton() {
 }
 
 function create() {
-  theme = game.add.audio("theme", 0.1);
+  theme = game.add.audio("theme", 0.1, true);
   theme.play();
   game.add.sprite(-1, -1, "cosby");
   game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -133,13 +135,12 @@ function initBricks() {
 
 function ballHitBrick(ball, brick) {
   var killTween = game.add.tween(brick.scale);
-  // brick.kill();
-  killTween.to({ x: 0, y: 0 }, 200, Phaser.Easing.Linear.None);
-  killTween.onComplete.addOnce(function() {
-    console.log(brick);
-
-    brick.kill();
-  }, this);
+  brick.kill();
+  // killTween.to({ x: 0, y: 0 }, 200, Phaser.Easing.Linear.None);
+  // killTween.onComplete.addOnce(function() {
+  //   console.log(brick);
+  //   brick.kill();
+  // }, this);
   killTween.start();
   score.hitBrick();
   bricksLeft -= 1;
@@ -150,9 +151,9 @@ function ballHitBrick(ball, brick) {
   if (bricksLeft <= 0) {
     alert("Way to go Morty, you *buuuuurrpp* killed Rick!");
     alert("Oh Jeez Rick I did-- I duh-- didn't meant to! Oh jeez oh god");
-    location.reload();
+    create()
   }
-  ballHit.play();
+  ballHitSFX.play();
 }
 
 function increaseDifficulty() {
@@ -171,6 +172,8 @@ function resetBallPaddle() {
 }
 
 function ballLeaveScreen() {
+	loseLifeSFX = game.add.audio('loseLife', 0.6)
+	loseLifeSFX.play()
   lives.lose();
   if (lives.current > 0) {
     loseLife();
@@ -186,8 +189,8 @@ function ballLeaveScreen() {
 }
 function ballHitPaddle(ball, paddle) {
   ball.animations.play("wobble");
-  ball.body.velocity.x = -1 * 5 * (paddle.x - ball.x);
-  paddleHit.play();
+  ball.body.velocity.x += -1 * 5 * (paddle.x - ball.x);
+  paddleHitSFX.play();
 }
 function startGame(startButton) {
   startButton.destroy();
