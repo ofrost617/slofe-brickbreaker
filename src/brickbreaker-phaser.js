@@ -104,7 +104,12 @@ function create() {
   buildPaddle();
   initBricks();
   buildText();
-  buildStartButton();
+  // buildStartButton();
+  // startinggame();
+}
+
+function startinggame(){
+  ball.body.velocity.set(150, -150);
 }
 
 function update() {
@@ -133,17 +138,17 @@ function initBricks() {
 
 function ballHitBrick(ball, brick) {
   var killTween = game.add.tween(brick.scale);
-  // brick.kill();
-  bricksLeft -= 1;
+  brick.kill();
   killTween.to({ x: 0, y: 0 }, 200, Phaser.Easing.Linear.None);
   killTween.onComplete.addOnce(function() {
-    console.log(brick);
-
-    brick.kill();
+    console.log("callback")
+    // brick.kill();
   }, this);
   killTween.start();
-  score.hitBrick();
 
+  score.hitBrick();
+  console.log("right before bricksLeft--")
+  bricksLeft -= 1;
   game.scorePoints.setText(score.string());
   scoreText.setText("Bricks: " + bricksLeft);
   // increaseDifficulty();
@@ -191,7 +196,7 @@ function ballHitPaddle(ball, paddle) {
   paddleHit.play();
 }
 function startGame(startButton) {
-  startButton.destroy();
+  // startButton.destroy();
   ball.body.velocity.set(150, -150);
   game.playing = true;
 }

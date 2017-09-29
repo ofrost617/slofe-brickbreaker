@@ -14,12 +14,10 @@ describe('Game feature', function() {
     it('removes brick ones hit', function() {
       preload();
       create();
+
       expect(window.bricksLeft).toEqual(28)
 
-      console.log(bricks)
-      console.log("brick 2 here")
-
-      ballHitBrick(ball, bricks);
+      window.startinggame();
       expect(window.bricksLeft).toEqual(27)
     });
   });
