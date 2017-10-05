@@ -43,4 +43,4 @@ So that I can see when I win or lose
 
 Deployment
 -----
-[RickBreaker](#https://brickandmorty.herokuapp.com/)
+[RickBreaker](https://brickandmorty.herokuapp.com/)
