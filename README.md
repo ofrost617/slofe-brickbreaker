@@ -18,6 +18,11 @@ Running the tests
 
 To run the tests, run the http-server and open the SpecRunner.html with http://localhost:8080/SpecRunner.html
 
+Screenshot
+------
+
+![alt text](screenshot/RickBreaker.png)
+
 User Stories
 ---------
 ```
@@ -43,4 +48,4 @@ So that I can see when I win or lose
 
 Deployment
 -----
-[RickBreaker](#https://brickandmorty.herokuapp.com/)
+[RickBreaker](https://brickandmorty.herokuapp.com)
