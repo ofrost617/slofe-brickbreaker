@@ -48,4 +48,8 @@ So that I can see when I win or lose
 
 Deployment
 -----
+<<<<<<< HEAD
 [RickBreaker](https://brickandmorty.herokuapp.com)
+=======
+[RickBreaker](https://brickandmorty.herokuapp.com/)
+>>>>>>> f47e8c3c36a5e63e371983b1605beefdae2a42b7
